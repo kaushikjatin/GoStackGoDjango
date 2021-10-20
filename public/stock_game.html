@@ -29,22 +29,22 @@
   </tr>
 </table>
 <h2>Total amount is 100 millon$</h2>
-<form action="" method="POST">
+<form action="calculation" method="POST">
   {% csrf_token %} Share in Apple:
   <input type="number" name="apple" min="0" max="100" /><br /><br />
-  Share in Facebook:<input
-    type="number"
-    name="facebook"
-    min="0"
-    max="100"
-  /><br /><br />
+
+  Share in Facebook:
+  <input type="number" name="facebook" min="0" max="100" /><br /><br />
+
   Share in Amazon:
   <input type="number" name="amazon" min="0" max="100" /><br /><br />
+
   Share in Google :
   <input type="number" name="google" min="0" max="100" /><br /><br />
-  Remaining Cash :
-  <input type="number" name="rem_cash
-  " min="0" max="100" /><br /><br />
+
+  {% comment %} Remaining Cash :
+  <input type="number" name="leftover" min="0" max="100" /><br /><br />
+  {% endcomment %}
   <input type="submit" />
 </form>
 

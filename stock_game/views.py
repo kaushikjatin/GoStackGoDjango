@@ -1,3 +1,5 @@
+from django.http.request import host_validation_re
+from django.http.response import Http404
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpRequest
 import urllib
@@ -12,6 +14,14 @@ amazon = {"m1": 1875, "m2": 2010.599976}
 apple = {"m1": 74.059998, "m2": 76.074997}
 
 
+def profit_calculator(ap, fb, ggl, ama):
+    profit = ap*(apple["m2"]-apple["m1"]) + fb*(facebook["m2"] - facebook["m1"]) + \
+        ggl*(google["m2"] - google["m1"]) + ama*(amazon["m2"]-amazon["m1"])
+    cost = ap*(apple["m1"]) + fb*(facebook["m1"]) + \
+        ggl*(google["m1"]) + ama*(amazon["m1"])
+    return (profit*100/cost)
+
+
 def homepage(request):
     return render(request, "news.html")
 
@@ -20,9 +30,29 @@ def stock_game(request):
     return render(request, "stock_game.html")
 
 
+def calculation(request):
+    share_apple = int(request.POST.get('apple'))
+    share_facebook = int(request.POST.get('facebook'))
+    share_amazon = int(request.POST.get('amazon'))
+    share_google = int(request.POST.get('google'))
+    # rem_cash = int(request.POST.get('leftover'))
+    total_share = share_amazon + share_facebook + \
+        share_apple + share_google
+    if (total_share > 100):
+        return render(request, "page404.html", {"error": "More than 100 percent reduce it"})
+    elif (total_share < 100):
+        return render(request, "page404.html", {"error": "Less than 100 percent increase it"})
+
+    p_profit = profit_calculator(share_apple, share_facebook,
+                                 share_google, share_amazon)
+    avg_profit = profit_calculator(25, 25, 25, 25)
+
+    return render(request, "page404.html", {"success": True, "p_profit": p_profit, "avg_profit": avg_profit})
+
+
 def news(request):
     res = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    query = "google"
+    query = "stock market nse bse"
 
     query = urllib.parse.quote_plus(query)  # Format into URL encoding
     number_result = 50
@@ -37,8 +67,8 @@ def news(request):
 
     links = []
     titles = []
-    res = titles
     descriptions = []
+    res = descriptions
     for r in result_div:
         # Checks if each element is present, else, raise exception
         try:
@@ -70,10 +100,12 @@ def news(request):
     for x in to_remove:
         del titles[x]
         del descriptions[x]
-
+    data = []
     for i in range(0, len(clean_links)):
+        data.append(i)
         print(titles[i])
         print(descriptions[i])
         print(clean_links[i])
         print()
-    return render(request, "news.html", {"result": res})
+
+    return render(request, "news.html", {"titles": titles, "data": data, "descriptions":  descriptions, "links": clean_links})

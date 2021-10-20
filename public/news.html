@@ -1,15 +1,28 @@
 {% extends 'homepage.html' %} {% block content %}
 <h1>News !</h1>
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
 <marquee
   bgcolor="#16DCE2"
   width="100%"
   scrollamount="1"
   direction="up"
-  height="100px"
+  height="350px"
 >
-  {{ for i in res:
-   }}
+  <table style="width: 100%">
+    {% for i in descriptions %}
+    <tr>
+      <td>{{i}}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </marquee>
+
 <form action="stock_game" method="POST">
   {% csrf_token %}
   <h1>rules for game</h1>
