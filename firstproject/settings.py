@@ -1,6 +1,8 @@
 
 
+import sys
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,9 +19,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
+sys.modules['django-bs4'] = __import__('django-bs4')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,10 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stock_game',
-    'rest_framework'
+    'rest_framework',
+    # 'fake-useragent',
+    # 'django-bs4',
 ]
 
+
 MIDDLEWARE = [
+    'django_user_agents.middleware.UserAgentMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -46,7 +51,7 @@ ROOT_URLCONF = 'firstproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'public')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,3 +117,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'

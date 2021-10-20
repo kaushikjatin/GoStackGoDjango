@@ -1,0 +1,51 @@
+{% extends 'news.html' %} {% block content %}
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+<h1>Invest It!</h1>
+<p>Invest wisely according to news and your trust in these companys</p>
+<table style="width: 100%">
+  <tr>
+    <th>Apple</th>
+    <th>Facebook</th>
+    <th>Google</th>
+    <th>Amazon</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+<h2>Total amount is 100 millon$</h2>
+<form action="" method="POST">
+  {% csrf_token %} Share in Apple:
+  <input type="number" name="apple" min="0" max="100" /><br /><br />
+  Share in Facebook:<input
+    type="number"
+    name="facebook"
+    min="0"
+    max="100"
+  /><br /><br />
+  Share in Amazon:
+  <input type="number" name="amazon" min="0" max="100" /><br /><br />
+  Share in Google :
+  <input type="number" name="google" min="0" max="100" /><br /><br />
+  Remaining Cash :
+  <input type="number" name="rem_cash
+  " min="0" max="100" /><br /><br />
+  <input type="submit" />
+</form>
+
+{% endblock %}

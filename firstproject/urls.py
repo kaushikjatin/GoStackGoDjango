@@ -4,5 +4,5 @@ from django.urls.conf import include
 
 
 urlpatterns = [
-    path("stock_game/", include('stock_game.urls'))
+    path("", include('stock_game.urls'))
 ]
