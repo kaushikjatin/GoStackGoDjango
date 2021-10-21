@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stock_game',
     'rest_framework',
-    # 'fake-useragent',
-    # 'django-bs4',
 ]
 
 

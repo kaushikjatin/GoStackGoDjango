@@ -31,6 +31,7 @@ def stock_game(request):
 
 
 def calculation(request):
+
     share_apple = int(request.POST.get('apple'))
     share_facebook = int(request.POST.get('facebook'))
     share_amazon = int(request.POST.get('amazon'))
@@ -51,8 +52,7 @@ def calculation(request):
 
 
 def news(request):
-    res = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    query = "stock market nse bse"
+    query = request.POST.get("news", False)
 
     query = urllib.parse.quote_plus(query)  # Format into URL encoding
     number_result = 50
@@ -102,10 +102,15 @@ def news(request):
         del descriptions[x]
     data = []
     for i in range(0, len(clean_links)):
-        data.append(i)
+        new_data = titles[i] + descriptions[i] + clean_links[i]
+        data.append(new_data)
         print(titles[i])
         print(descriptions[i])
         print(clean_links[i])
         print()
 
     return render(request, "news.html", {"titles": titles, "data": data, "descriptions":  descriptions, "links": clean_links})
+
+
+def stock_prediction(request):
+    return HttpResponse("This is stock prediction page")
