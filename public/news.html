@@ -5,13 +5,26 @@
   td {
     border: 1px solid black;
   }
+  h1{
+    text-align: center;
+  }
+  h2{
+    text-align: center;
+  }
+  button {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
 </style>
 <h1>News !</h1>
+<center>
 <form action="" method="POST">
   {% csrf_token %}
   <input type="text" name="news" /><br /><br />
   <button type="submit">Search</button>
 </form>
+</center>
 <marquee
   bgcolor="#16DCE2"
   width="100%"
@@ -33,9 +46,10 @@
   <h1>Stock Prediction Game</h1>
   <button type="submit">Lets Play</button>
 </form>
-<form action="stock_prediction" method="POST">
+<form action="predict" method="POST">
   {% csrf_token %}
-  <h1>Some Stock Prediction</h1>
-  <button type="submit">Lets Play</button>
+  <h1>Stock Prediction</h1>
+
+  <button type="click">Stock Prediction</button>
 </form>
 {% endblock %}
