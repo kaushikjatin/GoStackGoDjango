@@ -55,7 +55,10 @@ def calculation(request):
 def news(request):
     query = request.POST.get("news", False)
 
-    query = urllib.parse.quote_plus(query)  # Format into URL encoding
+    if(query != False):
+        query = urllib.parse.quote_plus(query)  # Format into URL encoding
+    else:
+        query = "NSE"
     number_result = 50
     ua = UserAgent()
 
