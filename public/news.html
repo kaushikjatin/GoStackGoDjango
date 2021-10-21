@@ -1,0 +1,41 @@
+{% extends 'homepage.html' %} {% block content %}
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+<h1>News !</h1>
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="text" name="news" /><br /><br />
+  <button type="submit">Search</button>
+</form>
+<marquee
+  bgcolor="#16DCE2"
+  width="100%"
+  scrollamount="1"
+  direction="up"
+  height="350px"
+>
+  <table style="width: 100%">
+    {% for i in data %}
+    <tr>
+      <td>{{i}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</marquee>
+
+<form action="stock_game" method="POST">
+  {% csrf_token %}
+  <h1>Stock Prediction Game</h1>
+  <button type="submit">Lets Play</button>
+</form>
+<form action="stock_prediction" method="POST">
+  {% csrf_token %}
+  <h1>Some Stock Prediction</h1>
+  <button type="submit">Lets Play</button>
+</form>
+{% endblock %}

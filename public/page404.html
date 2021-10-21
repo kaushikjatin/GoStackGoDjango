@@ -1,0 +1,8 @@
+{% extends 'homepage.html' %} {% block content %} {% if success %}
+<h1>Lets see did you beat the market</h1>
+<h2>Your Avg Return : {{p_profit}}</h2>
+<h2>Market Avg Return : {{avg_profit}}</h2>
+{% else %}
+<h1>Error encounterd</h1>
+<h2>{{error}}</h2>
+{% endif %} {% endblock %}

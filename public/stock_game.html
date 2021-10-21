@@ -1,0 +1,76 @@
+{% extends 'news.html' %} {% block content %}
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+<h1>Invest It!</h1>
+<p>Invest wisely, you are given 100 mil$ mention what percent you want to Invest!! </p>
+<table style="width: 100%">
+  <tr>
+    <th>Apple</th>
+  </tr>
+  <tr>
+    <td>Apple's New Iphone 13 line launched in market</td>
+  </tr>
+  <tr>
+    <td>Europe mnakes USB-C Mandatory</td>
+  </tr>
+</table>
+<table style="width: 100%">
+  <tr>
+    <th>Facebook</th>
+  </tr>
+  <tr>
+    <td>Apple's New Iphone 13 line launched in market</td>
+  </tr>
+  <tr>
+    <td>Europe mnakes USB-C Mandatory</td>
+  </tr>
+</table>
+<table style="width: 100%">
+  <tr>
+    <th>Google</th>
+  </tr>
+  <tr>
+    <td>Apple's New Iphone 13 line launched in market</td>
+  </tr>
+  <tr>
+    <td>Europe mnakes USB-C Mandatory</td>
+  </tr>
+</table>
+<table style="width: 100%">
+  <tr>
+    <th>Amazon</th>
+  </tr>
+  <tr>
+    <td>Apple's New Iphone 13 line launched in market</td>
+  </tr>
+  <tr>
+    <td>Europe mnakes USB-C Mandatory</td>
+  </tr>
+</table>
+
+<h2>Total amount is 100 millon$</h2>
+<form action="calculation" method="POST">
+  {% csrf_token %} Share in Apple:
+  <input type="number" name="apple" min="0" max="100" /><br /><br />
+
+  Share in Facebook:
+  <input type="number" name="facebook" min="0" max="100" /><br /><br />
+
+  Share in Amazon:
+  <input type="number" name="amazon" min="0" max="100" /><br /><br />
+
+  Share in Google :
+  <input type="number" name="google" min="0" max="100" /><br /><br />
+
+  {% comment %} Remaining Cash :
+  <input type="number" name="leftover" min="0" max="100" /><br /><br />
+  {% endcomment %}
+  <input type="submit" />
+</form>
+
+{% endblock %}
