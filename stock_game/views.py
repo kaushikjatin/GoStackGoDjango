@@ -7,6 +7,7 @@ import requests
 from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 import re
+import os
 
 google = {"m1": 1341.550049, "m2": 1462}
 facebook = {"m1": 206.75, "m2": 203.440002}
@@ -111,6 +112,11 @@ def news(request):
 
     return render(request, "news.html", {"titles": titles, "data": data, "descriptions":  descriptions, "links": clean_links})
 
+    import os
+
 
 def stock_prediction(request):
-    return HttpResponse("This is stock prediction page")
+    print("--------------------------------------os--------")
+    os.system(
+        "python3 -m  streamlit run E:\Coding Ninjas\Fil-Project\GoStackGoDjango\stock_game\main.py")
+    return HttpResponse("1")
