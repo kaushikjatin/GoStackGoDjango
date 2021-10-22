@@ -1,15 +1,6 @@
 {% extends 'homepage.html' %} {% block content %}
 <style>
 
-
-  tr{
-      margin: 20px 20px;
-      font-size: 20px;
-  }
-
-  td{
-
-  }
   h1{
     text-align: center;
   }
@@ -21,50 +12,6 @@
     text-align: center;
     display: block;
     margin: 0 auto;
-}
-
-.news_heading 
-{
-    font-size: 5vw;
-    box-sizing: border-box;
-    text-align: center;
-    font-style: italic;
-    color: blue;
-
-
-    -moz-transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
-        
-        -moz-animation: my-animation 15s linear infinite;
-        -webkit-animation: my-animation 15s linear infinite;
-        animation: my-animation 15s linear infinite;
-        }
-
-        /* for Firefox */
-        @-moz-keyframes my-animation {
-        from { -moz-transform: translateX(-100%); }
-        to { -moz-transform: translateX(100%); }
-        }
-
-        /* for Chrome */
-        @-webkit-keyframes my-animation {
-        from { -webkit-transform: translateX(-100%); }
-        to { -webkit-transform: translateX(100%); }
-        }
-
-        @keyframes my-animation {
-        from {
-            -moz-transform: translateX(-100%);
-            -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-        }
-        to {
-            -moz-transform: translateX(100%);
-            -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-        }
-        
 }
 
 .input_field 
@@ -83,50 +30,59 @@
 }
 
 </style>
-<h1 class="news_heading">...News....News...News......News....News...News......News....News...News...News....News...News......News....News...News......News....News...News...News....News...News......News....News...News......News....News...News...News....News...News......News....News...News......News....News...News......News....News...News......News....News...News...</h1>
 
 
-<br/>
+<div class="jumbotron">
+
+  <h1>Welcome to World of Stocks!</h1>
+  <br/><br/>
+  <div class="row">
+    <div class="col-lg-6">
+      <form action="stock_game" method="POST">
+        {% csrf_token %}
+        <h2>Stock Prediction Game</h2>
+        <button type="submit" class="button">Lets Play</button>
+      </form>
+    </div><!-- /.col-lg-6 -->
+
+    <div class="col-lg-6">
+
+      <form action="predict" method="POST">
+        {% csrf_token %}
+        <h2>Stock Prediction</h2>
+      
+        <button type="click" class="button">Stock Prediction</button>
+      </form>
+
+
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
+
+</div>
+
+<br/><br/>
 
 <center>
 
-  <h2>Search News By Title</h2>
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="text" name="news" class="input_field"/><br /><br />
-  <button type="submit" class="button">Search</button>
+  <div class="input-group">
+    <input type="text" class="form-control" name='news' placeholder="Search for your news..........">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit">Go!</button>
+    </span>
+  </div><!-- /input-group -->
 </form>
-<br/><br/><br/>
+<br/>
 </center>
 
 
 
 
-<marquee
-  bgcolor="#16DCE2"
-  width="100%"
-  scrollamount="1"
-  direction="up"
-  height="350px"
->
-  <table style="width: 100%">
-    {% for i in data %}
-    <tr>
-      <td>{{i}}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</marquee>
-
-<form action="stock_game" method="POST">
-  {% csrf_token %}
-  <h1>Stock Prediction Game</h1>
-  <button type="submit">Lets Play</button>
-</form>
-<form action="predict" method="POST">
-  {% csrf_token %}
-  <h1>Stock Prediction</h1>
-
-  <button type="click">Stock Prediction</button>
-</form>
+<ul class="list-group">
+  {% for i in data %}
+    <button type="button" class="list-group-item">{{i}}</button>
+  {% endfor %}
+</ul>
+  
 {% endblock %}
